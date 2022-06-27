@@ -15,8 +15,11 @@ import {
   SpeakerphoneIcon,
   VideoCameraIcon,
 } from "@heroicons/react/outline";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Header: FC = () => {
+  const { data: session } = useSession();
+
   return (
     <header className="flex bg-white px-4 py-2 shadow-sm sticky top-0 z-50">
       <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
@@ -60,17 +63,42 @@ const Header: FC = () => {
       </div>
 
       {/**Sign In and Out */}
-      <div className="hidden items-center lg:flex space-x-2 border border-gray-100 p-2 cursor-pointer">
-        <div className="relative h-5 w-5 flex-shrink-0">
-          <Image
-            objectFit="contain"
-            src="https://links.papareact.com/23l"
-            alt=""
-            layout="fill"
-          />
+      {session ? (
+        <div
+          onClick={() => signOut()}
+          className="hidden items-center lg:flex space-x-2 border border-gray-100 p-2 cursor-pointer"
+        >
+          <div className="relative h-5 w-5 flex-shrink-0">
+            <Image
+              objectFit="contain"
+              src="https://links.papareact.com/23l"
+              alt=""
+              layout="fill"
+            />
+          </div>
+          <div className="flex-1 text-xs">
+            <p className="truncate">{session?.user?.name}</p>
+            <p className="text-gray-400">1 Karma</p>
+          </div>
+
+          <ChevronDownIcon className="h-5 flex-shrink-0 text-gray-400" />
         </div>
-        <p className="text-gray-400">Sign In</p>
-      </div>
+      ) : (
+        <div
+          onClick={() => signIn()}
+          className="hidden items-center lg:flex space-x-2 border border-gray-100 p-2 cursor-pointer"
+        >
+          <div className="relative h-5 w-5 flex-shrink-0">
+            <Image
+              objectFit="contain"
+              src="https://links.papareact.com/23l"
+              alt=""
+              layout="fill"
+            />
+          </div>
+          <p className="text-gray-400">Sign In</p>
+        </div>
+      )}
     </header>
   );
 };
