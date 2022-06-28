@@ -20,7 +20,11 @@ type formData = {
   subreddit: string;
 };
 
-const PostBox: FC = () => {
+type Props = {
+  subreddit?: string;
+};
+
+const PostBox: FC<Props> = ({ subreddit }) => {
   const { data: session } = useSession();
   const [addSubreddit] = useMutation(ADD_SUBREDDIT);
   const [addPost] = useMutation(ADD_POST, {
@@ -45,7 +49,7 @@ const PostBox: FC = () => {
       } = await client.query({
         query: GET_SUBREDDIT_BY_TOPIC,
         variables: {
-          topic: formData.subreddit,
+          topic: subreddit || formData.subreddit,
         },
       });
 
@@ -121,7 +125,13 @@ const PostBox: FC = () => {
           disabled={!session}
           type="text"
           className="bg-gray-50 p-2 pl-5 outline-none rounded-md flex-1"
-          placeholder={session ? "Create a new post" : "Sign In to Post"}
+          placeholder={
+            session
+              ? subreddit
+                ? `Create a post in r/${subreddit}`
+                : "Create a new post"
+              : "Sign In to Post"
+          }
         />
         <PhotographIcon
           onClick={() => setImageOpen(!imageOpen)}
@@ -145,15 +155,17 @@ const PostBox: FC = () => {
             />
           </div>
 
-          <div className="flex items-center px-2">
-            <p className="min-w-[90px]">Subreddit:</p>
-            <input
-              className="m-2 flex-1 bg-blue-50 p-2 outline-none"
-              type="text"
-              placeholder="Subreddit"
-              {...register("subreddit")}
-            />
-          </div>
+          {subreddit && (
+            <div className="flex items-center px-2">
+              <p className="min-w-[90px]">Subreddit:</p>
+              <input
+                className="m-2 flex-1 bg-blue-50 p-2 outline-none"
+                type="text"
+                placeholder="Subreddit"
+                {...register("subreddit")}
+              />
+            </div>
+          )}
 
           {imageOpen && (
             <div className="flex items-center px-2">
