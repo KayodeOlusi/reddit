@@ -17,15 +17,19 @@ type Post {
   created_at: DateTime
   id: ID!
   image: String
-  subreddit: Subreddit
+  subreddit: [Subreddit]
     @materializer(
-      query: "getSubreddit"
+      query: "getSubredditListById"
       arguments: [{ name: "id", field: "subreddit_id" }]
     )
   subreddit_id: ID
   title: String
   username: String
-  voteList: [Vote] @materializer(query: "getVoteUsingPost_id")
+  votes: [Vote]
+    @materializer(
+      query: "getVoteUsingPost_id"
+      arguments: [{ name: "id", field: "id" }]
+    )
 }
 
 type Subreddit {
@@ -94,10 +98,18 @@ type Query {
     @dbquery(
       type: "postgresql"
       query: """
-      SELECT T."created_at", T."id", T."post_id", T."upvote", T."username"
-        FROM "public"."vote" T
-        WHERE T."post_id" = $1
+      select * from "vote" where "post_id" = $1
+      order by "created_at" desc
       """
+      configuration: "postgresql_config"
+    )
+  getSubredditListById(id: ID!): [Subreddit]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from "subreddit" where "id" = $1
+      """
+      table: "subreddit"
       configuration: "postgresql_config"
     )
   getSubredditList: [Subreddit]

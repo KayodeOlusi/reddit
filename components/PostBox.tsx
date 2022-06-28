@@ -1,13 +1,17 @@
+// Dependencies, Mutations and Queries
+import toast from "react-hot-toast";
+import client from "../apollo-client";
+import { useMutation } from "@apollo/client";
+import { ADD_POST, ADD_SUBREDDIT } from "../graphql/mutations";
+import { GET_SUBREDDIT_BY_TOPIC } from "../graphql/queries";
+// Icons
 import { LinkIcon, PhotographIcon } from "@heroicons/react/outline";
+// Hooks
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { FC, useState } from "react";
+// Components
 import Avatar from "./Avatar";
-import { useMutation } from "@apollo/client";
-import { ADD_POST, ADD_SUBREDDIT } from "../graphql/mutations";
-import client from "../apollo-client";
-import { GET_SUBREDDIT_BY_TOPIC } from "../graphql/queries";
-import toast from "react-hot-toast";
 
 type formData = {
   postTitle: string;
@@ -100,7 +104,6 @@ const PostBox: FC = () => {
       toast.error("Error creating post", {
         id: notification,
       });
-      console.log(error);
     }
   });
 
