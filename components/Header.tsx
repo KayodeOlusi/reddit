@@ -37,7 +37,10 @@ const Header: FC = () => {
       </div>
 
       {/**Search */}
-      <form className="flex flex-1 items-center space-x-2 border border-gray-200 rounded-sm bg-gray-100 p-3 py-1">
+      <form
+        className="hidden flex-1 items-center space-x-2 border border-gray-200
+        rounded-sm bg-gray-100 p-3 py-1 lg:flex"
+      >
         <SearchIcon className="h-6 w-6 text-gray-400" />
         <input
           className="flex-1 bg-transparent outline-none"
@@ -66,7 +69,8 @@ const Header: FC = () => {
       {session ? (
         <div
           onClick={() => signOut()}
-          className="hidden items-center lg:flex space-x-2 border border-gray-100 p-2 cursor-pointer"
+          className="hidden items-center lg:flex space-x-2
+          border border-gray-100 p-2 cursor-pointer"
         >
           <div className="relative h-5 w-5 flex-shrink-0">
             <Image
@@ -86,7 +90,8 @@ const Header: FC = () => {
       ) : (
         <div
           onClick={() => signIn()}
-          className="hidden items-center lg:flex space-x-2 border border-gray-100 p-2 cursor-pointer"
+          className="hidden items-center lg:flex space-x-2 
+          border border-gray-100 p-2 cursor-pointer"
         >
           <div className="relative h-5 w-5 flex-shrink-0">
             <Image
