@@ -20,6 +20,25 @@ export const GET_ALL_POSTS = gql`
       title
       subreddit_id
       username
+      comments {
+        created_at
+        post_id
+        id
+        username
+        text
+      }
+      subreddit {
+        created_at
+        id
+        topic
+      }
+      votes {
+        created_at
+        id
+        post_id
+        username
+        upvote
+      }
     }
   }
 `;

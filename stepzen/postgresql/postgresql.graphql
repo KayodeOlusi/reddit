@@ -13,14 +13,13 @@ type Comment {
 
 type Post {
   body: String
-  commentList: [Comment] @materializer(query: "getCommentUsingPost_id")
   created_at: DateTime
   id: ID!
   image: String
-  subreddit: [Subreddit]
+  comments: [Comment]
     @materializer(
-      query: "getSubredditListById"
-      arguments: [{ name: "id", field: "subreddit_id" }]
+      query: "getCommentUsingPost_id"
+      arguments: [{ name: "id", field: "id" }]
     )
   subreddit_id: ID
   title: String
@@ -29,6 +28,11 @@ type Post {
     @materializer(
       query: "getVoteUsingPost_id"
       arguments: [{ name: "id", field: "id" }]
+    )
+  subreddit: [Subreddit]
+    @materializer(
+      query: "getSubredditListById"
+      arguments: [{ name: "id", field: "subreddit_id" }]
     )
 }
 
@@ -88,9 +92,8 @@ type Query {
     @dbquery(
       type: "postgresql"
       query: """
-      SELECT T."created_at", T."id", T."post_id", T."text", T."username"
-        FROM "public"."comment" T
-        WHERE T."post_id" = $1
+      select * from "comment" where "id" = $1
+      order by "created_at" desc
       """
       configuration: "postgresql_config"
     )
