@@ -13,9 +13,6 @@ const Home: NextPage = () => {
     },
   });
   const subreddits: Subreddit[] = data?.getSubredditListLimit;
-  {
-    console.log(subreddits);
-  }
 
   return (
     <div className="my-7 max-w-5xl mx-auto">
@@ -28,10 +25,11 @@ const Home: NextPage = () => {
       <PostBox />
       <main className="flex">
         <Feed />
-
-        <div className="sticky top-36 mx-5 hidden h-fit min-w-[300px] rounded-md border border-gray-300 bg-white lg:inline">
+        <div
+          className="sticky top-36 mx-5 hidden h-fit min-w-[300px]
+         rounded-md border border-gray-300 bg-white lg:inline"
+        >
           <p className="text-md mb-1 p-4 pb-3 font-bold">Top Communities</p>
-
           <div>
             {subreddits?.map((subreddit, index) => (
               <SubredditRow

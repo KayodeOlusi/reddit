@@ -56,7 +56,6 @@ const PostBox: FC<Props> = ({ subreddit }) => {
       const subredditExists = getSubredditListByTopic.length > 0;
       if (!subredditExists) {
         // Create a new subreddit
-        console.log("Creating new subreddit...");
         const {
           data: { insertSubreddit: newSubreddit },
         } = await addSubreddit({
@@ -64,7 +63,6 @@ const PostBox: FC<Props> = ({ subreddit }) => {
             topic: formData.subreddit,
           },
         });
-        console.log("Creating", formData);
         const image = formData.postImage || "";
 
         // Create a new post
@@ -79,7 +77,6 @@ const PostBox: FC<Props> = ({ subreddit }) => {
             username: session?.user?.name,
           },
         });
-        console.log(newPost, "New Post");
       } else {
         // Use existing subreddit
         console.log("Using existing subreddit", formData);
