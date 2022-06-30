@@ -79,9 +79,6 @@ const PostBox: FC<Props> = ({ subreddit }) => {
         });
       } else {
         // Use existing subreddit
-        console.log("Using existing subreddit", formData);
-        console.log(getSubredditListByTopic);
-
         const image = formData.postImage || "";
         const {
           data: { insertPost: newPost },
@@ -152,14 +149,14 @@ const PostBox: FC<Props> = ({ subreddit }) => {
             />
           </div>
 
-          {subreddit && (
+          {!subreddit && (
             <div className="flex items-center px-2">
               <p className="min-w-[90px]">Subreddit:</p>
               <input
                 className="m-2 flex-1 bg-blue-50 p-2 outline-none"
                 type="text"
                 placeholder="Subreddit"
-                {...register("subreddit")}
+                {...register("subreddit", { required: true })}
               />
             </div>
           )}
@@ -171,7 +168,7 @@ const PostBox: FC<Props> = ({ subreddit }) => {
                 className="m-2 flex-1 bg-blue-50 p-2 outline-none"
                 type="text"
                 placeholder="Image URL (optional)"
-                {...register("postImage", { required: true })}
+                {...register("postImage")}
               />
             </div>
           )}

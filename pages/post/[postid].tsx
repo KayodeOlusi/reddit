@@ -27,7 +27,6 @@ const PostPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors },
   } = useForm<FormData>();
@@ -36,7 +35,6 @@ const PostPage = () => {
   // Post the comment
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const notification = toast.loading("Posting comment...");
-    console.log(data, router.query.postid, post.id, post.comments);
 
     try {
       await addComment({
@@ -54,7 +52,6 @@ const PostPage = () => {
     toast.success("Comment posted!", {
       id: notification,
     });
-    console.log(data, router.query.postid, post.id, post, post.comments);
   };
 
   return (
@@ -104,7 +101,7 @@ const PostPage = () => {
                   <Avatar seed={comment.username} />
                 </div>
 
-                <div className="flex fle-col">
+                <div className="flex flex-col">
                   <p className="py-2 text-xs text-gray-400">
                     <span className="font-semibold text-gray-500">
                       {comment.username}

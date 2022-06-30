@@ -25,9 +25,9 @@ type Props = {
 const Post: FC<Props> = ({ post }) => {
   const { data: session } = useSession();
   const [vote, setVote] = useState<boolean>();
-  const { data, loading } = useQuery(GET_VOTES_BY_POST_ID, {
+  const { data } = useQuery(GET_VOTES_BY_POST_ID, {
     variables: {
-      post_id: post.id,
+      post_id: post?.id,
     },
   });
   const [addVote] = useMutation(ADD_VOTE, {
@@ -52,7 +52,6 @@ const Post: FC<Props> = ({ post }) => {
     if (vote && isUpVote) return;
     if (vote === false && !isUpVote) return;
 
-    console.log("voting...", isUpVote);
     await addVote({
       variables: {
         post_id: post.id,
