@@ -120,13 +120,17 @@ const Post: FC<Props> = ({ post }) => {
                 </span>
               </Link>{" "}
               . Posted by u/
-              {post.username} <TimeAgo date={post.created_at} />
+              {post.username}{" "}
+              <TimeAgo
+                className="text-xs text-black md:text-sm"
+                date={post.created_at}
+              />
             </p>
           </div>
 
           {/**Body */}
           <div className="py-4">
-            <h2 className="text-xl font-semibold">{post.title}</h2>
+            <h2 className="text-sm md:text-xl font-semibold">{post.title}</h2>
             <p className="mt-2 text-sm font-light">{post.body}</p>
           </div>
 

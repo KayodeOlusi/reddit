@@ -110,7 +110,7 @@ const PostBox: FC<Props> = ({ subreddit }) => {
   return (
     <form
       onSubmit={onSubmit}
-      className="sticky top-16 z-50 bg-white border rounded-md border-gray-300 p-2"
+      className="sticky top-14 z-50 bg-white border rounded-md border-gray-300 p-2 md:sticky md:top-16"
     >
       <div className="flex items-center space-x-3">
         <Avatar />
@@ -140,9 +140,11 @@ const PostBox: FC<Props> = ({ subreddit }) => {
       {!!watch("postTitle") && (
         <div className="flex flex-col py-2">
           <div className="flex items-center px-2">
-            <p className="min-w-[90px]">Body:</p>
+            <p className="min-w-[70px] text-xs md:text-base md:min-w-[90px]">
+              Body:
+            </p>
             <input
-              className="m-2 flex-1 bg-blue-50 p-2 outline-none"
+              className="m-2 flex-1 bg-blue-50 p-2 outline-none rounded-md text-sm"
               type="text"
               placeholder="Text"
               {...register("postBody")}
@@ -151,9 +153,11 @@ const PostBox: FC<Props> = ({ subreddit }) => {
 
           {!subreddit && (
             <div className="flex items-center px-2">
-              <p className="min-w-[90px]">Subreddit:</p>
+              <p className="min-w-[70px] text-xs md:text-base md:min-w-[90px]">
+                Subreddit:
+              </p>
               <input
-                className="m-2 flex-1 bg-blue-50 p-2 outline-none"
+                className="m-2 flex-1 bg-blue-50 p-2 outline-none rounded-md text-sm"
                 type="text"
                 placeholder="Subreddit"
                 {...register("subreddit", { required: true })}
@@ -163,9 +167,11 @@ const PostBox: FC<Props> = ({ subreddit }) => {
 
           {imageOpen && (
             <div className="flex items-center px-2">
-              <p className="min-w-[90px]">Image URL</p>
+              <p className="min-w-[70px] text-xs md:min-w-[90px] md:text-base">
+                Image URL
+              </p>
               <input
-                className="m-2 flex-1 bg-blue-50 p-2 outline-none"
+                className="m-2 flex-1 bg-blue-50 p-2 outline-none rounded-md text-sm"
                 type="text"
                 placeholder="Image URL (optional)"
                 {...register("postImage")}
@@ -188,7 +194,7 @@ const PostBox: FC<Props> = ({ subreddit }) => {
           {!!watch("postTitle") && (
             <button
               type="submit"
-              className="w-full rounded-full bg-blue-400 p-2 text-white"
+              className="w-full rounded-full bg-blue-400 p-2 text-white text-xs md:text-base"
             >
               Create Post
             </button>

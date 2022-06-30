@@ -17,7 +17,7 @@ const Home: NextPage = () => {
   return (
     <div className="my-7 max-w-5xl mx-auto">
       <Head>
-        <title>Reddit</title>
+        <title>Reddit Clone</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
       <main className="flex">
         <Feed />
         <div
-          className="sticky top-36 mx-5 hidden h-fit min-w-[300px]
+          className="sticky mt-5 top-36 mx-5 hidden h-fit min-w-[300px]
          rounded-md border border-gray-300 bg-white lg:inline"
         >
           <p className="text-md mb-1 p-4 pb-3 font-bold">Top Communities</p>

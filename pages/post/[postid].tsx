@@ -73,14 +73,14 @@ const PostPage = () => {
               <textarea
                 disabled={!session}
                 {...register("comment")}
-                className="h-24 rounded-md border border-gray-200 p-2 pl-4 outline-none disabled:bg-gray-50"
+                className="text-xs h-24 rounded-md border border-gray-200 p-2 pl-4 outline-none disabled:bg-gray-50 md:text-base"
                 placeholder={session ? "Your thoughts" : "Sign in to comment"}
               />
 
               <button
                 type="submit"
                 disabled={!session}
-                className="rounded-full bg-red-500 p-3 text-white disabled:bg-gray-200"
+                className="text-xs rounded-full bg-red-500 p-2 text-white disabled:bg-gray-200 md:p-3 md:text-sm"
               >
                 Comment
               </button>
@@ -92,7 +92,7 @@ const PostPage = () => {
 
             {post?.comments.map((comment) => (
               <div
-                className="relative flex items-center space-x-2 space-y-5"
+                className="relative flex items-center space-x-2 space-y-1 md:space-y-3"
                 key={comment.id}
               >
                 <hr className="absolute top-10 h-16 border left-7 z-0" />
@@ -103,12 +103,16 @@ const PostPage = () => {
 
                 <div className="flex flex-col">
                   <p className="py-2 text-xs text-gray-400">
-                    <span className="font-semibold text-gray-500">
+                    <span className="font-semibold text-gray-500 text-xs md:text-base">
                       {comment.username}
                     </span>{" "}
-                    . <Timeago date={comment.created_at} />
+                    .{" "}
+                    <Timeago
+                      date={comment.created_at}
+                      className="text-xs text-black"
+                    />
                   </p>
-                  <p>{comment.text}</p>
+                  <p className="text-xs md:text-base">{comment.text}</p>
                 </div>
               </div>
             ))}
